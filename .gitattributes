@@ -1,0 +1,5 @@
+# Store and check out every file byte-for-byte (no LF/CRLF conversion).
+# data/asset-manifest.php records exact sizes + SHA-256 of the shipped
+# CSS/JS, and gd_asset() / tools/asset-check.php compare against them, so a
+# line-ending rewrite on checkout would look like a "WRONG FILE" deploy.
+* -text

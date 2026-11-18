@@ -1,0 +1,30 @@
+/* ===========================================================================
+   Login page — standalone. Never loads admin-core.css/the sidebar shell.
+   ========================================================================= */
+
+.gd-login-page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(160deg, #171b2b 0%, #232a41 60%, #2c355a 100%);
+  padding: 1.5rem;
+}
+.gd-login-card {
+  width: 100%; max-width: 380px; background: #fff; border-radius: .9rem;
+  box-shadow: 0 20px 60px rgba(10, 12, 25, .35); padding: 2rem 1.85rem;
+}
+.gd-login-brand { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.4rem; }
+.gd-login-brand img { border-radius: .4rem; }
+.gd-login-brand strong { display: block; font-size: 1.02rem; }
+.gd-login-brand span { display: block; font-size: .74rem; color: #66707f; }
+.gd-login-card h1 { font-size: 1.15rem; font-weight: 700; margin-bottom: .25rem; }
+.gd-login-card p.sub { color: #66707f; font-size: .85rem; margin-bottom: 1.4rem; }
+.gd-login-error {
+  background: #fdecea; color: #c0392b; border: 1px solid #f7d3ce; border-radius: .5rem;
+  padding: .65rem .85rem; font-size: .85rem; margin-bottom: 1.1rem;
+}
+.gd-login-notice {
+  background: #fff8e6; color: #8a6100; border: 1px solid #f2e2ad; border-radius: .5rem;
+  padding: .65rem .85rem; font-size: .85rem; margin-bottom: 1.1rem;
+}
+.gd-login-card .form-label { font-weight: 600; font-size: .85rem; }
+.gd-login-card .btn { font-weight: 600; }
+.gd-login-foot { text-align: center; margin-top: 1.2rem; font-size: .78rem; color: #8a93a6; }

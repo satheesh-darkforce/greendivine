@@ -1,0 +1,40 @@
+# =====================================================================
+# Green Divine — what stays OUT of git (this repository is public)
+# =====================================================================
+
+# ---- Secrets: never commit ----
+# Admin logins (password hashes). Fresh install: copy admin-users.example.php
+# and run `php admin/bin/reset-password.php admin`.
+/admin/config/admin-users.php
+# Browser key for tools/asset-check.php (see tools/check-key.example.php)
+/tools/check-key.php
+.env
+.env.*
+
+# ---- Runtime data written by the site / admin console ----
+# Admin save snapshots (recreated automatically on the next save)
+/data/backups/
+# Login throttling + activity log
+/data/security/
+# Half-written files from the admin's atomic save (file.php.<random>.tmp)
+*.tmp
+
+# ---- Old-site backups and source material (not used by the live code) ----
+/New folder/
+/new_assets/
+*.pdf
+# Hostinger's default placeholder page
+/default.php
+
+# ---- Logs ----
+*.log
+error_log
+
+# ---- OS / editor clutter ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~

@@ -1,0 +1,235 @@
+/* ===========================================================================
+   Green Divine Admin — core shell (sidebar, topbar, tables, forms, flash).
+   Deliberately its own calm "back office" palette (slate/indigo), distinct
+   from the public site's green/gold theme, so an admin never mistakes this
+   console for the live site. Loaded on every admin page except login.php
+   (see login.css). Layers on top of the vendored Bootstrap 5 bundle.
+   ========================================================================= */
+
+:root {
+  --gd-a-bg:        #f4f6f9;
+  --gd-a-surface:   #ffffff;
+  --gd-a-border:    #e2e6ee;
+  --gd-a-text:      #1f2530;
+  --gd-a-muted:     #66707f;
+  --gd-a-primary:   #3350c7;
+  --gd-a-primary-d: #26409c;
+  --gd-a-accent:    #0f766e;
+  --gd-a-danger:    #c0392b;
+  --gd-a-warning:   #b8860b;
+  --gd-a-success:   #1b7a4d;
+  --gd-a-sidebar:   #171b2b;
+  --gd-a-sidebar-2: #232a41;
+  --gd-a-radius:    .6rem;
+  --gd-a-shadow:    0 1px 2px rgba(20, 24, 40, .06), 0 1px 1px rgba(20, 24, 40, .04);
+}
+
+.gd-admin { background: var(--gd-a-bg); color: var(--gd-a-text); min-height: 100vh; font-size: .94rem; }
+.gd-admin a { text-decoration: none; }
+.gd-admin h1, .gd-admin h2, .gd-admin h3, .gd-admin h4 { color: var(--gd-a-text); }
+
+/* ---------------------------------------------------------------------
+ * Shell layout: fixed sidebar + topbar, scrollable content column
+ * ------------------------------------------------------------------- */
+.gd-admin-shell { display: flex; min-height: 100vh; }
+
+.gd-admin-sidebar {
+  width: 250px; flex: 0 0 250px; background: var(--gd-a-sidebar); color: #cfd4e6;
+  position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 1040;
+  transition: transform .25s ease;
+}
+.gd-admin-sidebar-brand {
+  display: flex; align-items: center; gap: .6rem; padding: 1.1rem 1.25rem;
+  color: #fff; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.gd-admin-sidebar-brand img { border-radius: .35rem; }
+.gd-admin-nav { padding: .75rem 0 2rem; }
+.gd-admin-nav-group { margin-top: 1rem; }
+.gd-admin-nav-group:first-child { margin-top: 0; }
+.gd-admin-nav-label {
+  font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+  color: #7d86a3; padding: 0 1.25rem; margin-bottom: .35rem; display: block;
+}
+.gd-admin-nav a {
+  display: flex; align-items: center; gap: .65rem; padding: .5rem 1.25rem;
+  color: #c3c9dd; font-size: .88rem; border-left: 3px solid transparent;
+}
+.gd-admin-nav a:hover { background: rgba(255,255,255,.05); color: #fff; }
+.gd-admin-nav a.active {
+  background: var(--gd-a-sidebar-2); color: #fff; border-left-color: var(--gd-a-primary);
+  font-weight: 600;
+}
+.gd-admin-nav i { width: 1.1rem; text-align: center; opacity: .85; }
+
+.gd-admin-main { flex: 1 1 auto; margin-left: 250px; min-width: 0; display: flex; flex-direction: column; }
+
+.gd-admin-topbar {
+  background: var(--gd-a-surface); border-bottom: 1px solid var(--gd-a-border);
+  padding: .75rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 1030;
+}
+.gd-admin-topbar-title { font-weight: 700; font-size: 1rem; margin: 0; }
+.gd-admin-topbar-right { display: flex; align-items: center; gap: .9rem; font-size: .86rem; }
+.gd-admin-sidebar-toggle {
+  display: none; border: 0; background: none; font-size: 1.3rem; color: var(--gd-a-text); padding: .2rem .4rem;
+}
+
+.gd-admin-content { padding: 1.5rem; flex: 1 1 auto; }
+
+/* ---------------------------------------------------------------------
+ * Flash banners
+ * ------------------------------------------------------------------- */
+.gd-admin-flash {
+  border-radius: var(--gd-a-radius); padding: .75rem 1rem; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .6rem; font-size: .9rem; border: 1px solid transparent;
+}
+.gd-admin-flash-success { background: #eafaf1; color: var(--gd-a-success); border-color: #c9ecd9; }
+.gd-admin-flash-error   { background: #fdecea; color: var(--gd-a-danger);  border-color: #f7d3ce; }
+
+/* ---------------------------------------------------------------------
+ * Page toolbar (title + primary action), cards, tables
+ * ------------------------------------------------------------------- */
+.gd-admin-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.gd-admin-toolbar h1 { font-size: 1.3rem; font-weight: 700; margin: 0; }
+.gd-admin-toolbar p { color: var(--gd-a-muted); margin: .2rem 0 0; font-size: .85rem; }
+
+.gd-admin-card {
+  background: var(--gd-a-surface); border: 1px solid var(--gd-a-border); border-radius: var(--gd-a-radius);
+  box-shadow: var(--gd-a-shadow); padding: 1.25rem 1.4rem; margin-bottom: 1.25rem;
+}
+.gd-admin-card > h2, .gd-admin-card > h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+.gd-admin-card-hint { color: var(--gd-a-muted); font-size: .82rem; margin-top: -.6rem; margin-bottom: 1rem; }
+
+.gd-admin-table-wrap { background: var(--gd-a-surface); border: 1px solid var(--gd-a-border); border-radius: var(--gd-a-radius); box-shadow: var(--gd-a-shadow); overflow-x: auto; }
+.gd-admin-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.gd-admin-table th {
+  text-align: left; padding: .7rem 1rem; background: #f8f9fc; color: var(--gd-a-muted);
+  font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--gd-a-border);
+  white-space: nowrap;
+}
+.gd-admin-table td { padding: .65rem 1rem; border-bottom: 1px solid var(--gd-a-border); vertical-align: middle; }
+.gd-admin-table tr:last-child td { border-bottom: 0; }
+.gd-admin-table-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: .4rem; border: 1px solid var(--gd-a-border); background: #f2f4f8; }
+.gd-admin-table-empty { padding: 2.5rem 1rem; text-align: center; color: var(--gd-a-muted); }
+.gd-admin-actions { display: flex; gap: .4rem; justify-content: flex-end; white-space: nowrap; }
+.gd-admin-order-controls { display: flex; flex-direction: column; gap: .1rem; }
+.gd-admin-order-controls button { border: 0; background: none; color: var(--gd-a-muted); line-height: 1; padding: .1rem .3rem; }
+.gd-admin-order-controls button:hover { color: var(--gd-a-primary); }
+
+/* ---------------------------------------------------------------------
+ * Forms
+ * ------------------------------------------------------------------- */
+.gd-admin .form-label { font-weight: 600; font-size: .85rem; }
+.gd-admin .form-text, .gd-admin .form-hint { font-size: .78rem; color: var(--gd-a-muted); }
+.gd-admin .is-invalid ~ .invalid-feedback,
+.gd-admin .invalid-feedback { display: block; }
+.gd-admin .btn-gd-primary-a { background: var(--gd-a-primary); border-color: var(--gd-a-primary); color: #fff; }
+.gd-admin .btn-gd-primary-a:hover { background: var(--gd-a-primary-d); border-color: var(--gd-a-primary-d); color: #fff; }
+.gd-admin-field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+
+/* ---------------------------------------------------------------------
+ * Repeatable groups (features / specs / gallery / FAQ / references rows)
+ * ------------------------------------------------------------------- */
+.gd-repeat-list { display: flex; flex-direction: column; gap: .6rem; margin-bottom: .75rem; }
+.gd-repeat-row {
+  display: flex; gap: .6rem; align-items: flex-start; background: #f8f9fc;
+  border: 1px solid var(--gd-a-border); border-radius: .5rem; padding: .65rem;
+}
+.gd-repeat-row-fields { flex: 1 1 auto; display: grid; gap: .5rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.gd-repeat-row-remove {
+  flex: 0 0 auto; border: 0; background: none; color: var(--gd-a-danger); font-size: 1.1rem;
+  padding: .3rem .4rem; line-height: 1;
+}
+.gd-repeat-add { font-size: .84rem; }
+
+/* ---------------------------------------------------------------------
+ * Image field widget (admin/inc/uploads.php: gd_image_field())
+ * ------------------------------------------------------------------- */
+.gd-image-field-row { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+.gd-image-preview {
+  width: 96px; height: 96px; border-radius: .5rem; border: 1px solid var(--gd-a-border);
+  background: #f2f4f8; display: flex; align-items: center; justify-content: center; overflow: hidden; flex: 0 0 auto;
+}
+.gd-image-preview img { width: 100%; height: 100%; object-fit: cover; }
+.gd-image-preview-empty { color: #b7bfd0; font-size: 1.6rem; }
+.gd-image-field-controls { flex: 1 1 220px; min-width: 220px; }
+
+/* ---------------------------------------------------------------------
+ * Dashboard quick-stat cards
+ * ------------------------------------------------------------------- */
+.gd-admin-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.gd-admin-stat-card { background: var(--gd-a-surface); border: 1px solid var(--gd-a-border); border-radius: var(--gd-a-radius); box-shadow: var(--gd-a-shadow); padding: 1.1rem 1.25rem; }
+.gd-admin-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--gd-a-primary); line-height: 1; }
+.gd-admin-stat-label { font-size: .82rem; color: var(--gd-a-muted); margin-top: .35rem; }
+.gd-admin-quicklinks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .9rem; }
+.gd-admin-quicklink {
+  display: flex; align-items: center; gap: .75rem; background: var(--gd-a-surface); border: 1px solid var(--gd-a-border);
+  border-radius: var(--gd-a-radius); padding: 1rem 1.1rem; color: var(--gd-a-text); box-shadow: var(--gd-a-shadow);
+}
+.gd-admin-quicklink:hover { border-color: var(--gd-a-primary); color: var(--gd-a-text); }
+.gd-admin-quicklink i { font-size: 1.3rem; color: var(--gd-a-primary); }
+
+/* ---------------------------------------------------------------------
+ * Mobile — sidebar becomes an off-canvas drawer
+ * ------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .gd-admin-sidebar { transform: translateX(-100%); box-shadow: 0 0 0 100vmax rgba(0,0,0,0); }
+  .gd-admin-sidebar.is-open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,.25); }
+  .gd-admin-main { margin-left: 0; }
+  .gd-admin-sidebar-toggle { display: inline-block; }
+  .gd-admin-sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,12,20,.45); z-index: 1035; }
+  .gd-admin-sidebar-backdrop.is-open { display: block; }
+}
+
+@media (max-width: 575.98px) {
+  .gd-admin-content { padding: 1rem; }
+  .gd-admin-card { padding: 1rem; }
+}
+
+/* ---------------------------------------------------------------------
+ * Rich text toolbar (admin-core.js progressively enhances
+ * textarea[data-gd-richtext] into this — the textarea itself is what
+ * actually submits, so it's just hidden, never removed).
+ * ------------------------------------------------------------------- */
+.gd-richtext-source { display: none; }
+.gd-richtext-toolbar {
+  display: flex; flex-wrap: wrap; gap: .2rem; padding: .4rem;
+  background: #f8f9fc; border: 1px solid var(--gd-a-border); border-bottom: 0;
+  border-radius: .5rem .5rem 0 0;
+}
+.gd-richtext-btn {
+  border: 1px solid transparent; background: none; color: var(--gd-a-text);
+  width: 2rem; height: 2rem; border-radius: .35rem; font-size: .95rem;
+}
+.gd-richtext-btn:hover { background: #fff; border-color: var(--gd-a-border); }
+.gd-richtext-editable {
+  min-height: 220px; padding: .75rem .9rem; border: 1px solid var(--gd-a-border);
+  border-radius: 0 0 .5rem .5rem; background: #fff; line-height: 1.6;
+}
+.gd-richtext-editable:focus { outline: 2px solid var(--gd-a-primary); outline-offset: -1px; }
+.gd-richtext-editable h2 { font-size: 1.25rem; font-weight: 700; margin: .5rem 0; }
+.gd-richtext-editable h3 { font-size: 1.1rem; font-weight: 700; margin: .5rem 0; }
+.gd-richtext-editable p  { margin: 0 0 .75rem; }
+.gd-richtext-editable ul, .gd-richtext-editable ol { margin: 0 0 .75rem; padding-left: 1.4rem; }
+
+/* Rich text: HTML view, remove-link icon, and the link dialog */
+.gd-richtext-btn.active { background: #fff; border-color: var(--gd-a-primary); color: var(--gd-a-primary); }
+.gd-richtext-btn:disabled { opacity: .35; }
+.gd-richtext-btn .gd-richtext-x { font-size: .7rem; margin-left: -.35rem; }
+.gd-richtext-source.gd-richtext-html {
+  display: block; width: 100%; min-height: 320px; padding: .75rem .9rem;
+  border: 1px solid var(--gd-a-border); border-radius: 0 0 .5rem .5rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .82rem; line-height: 1.5;
+}
+.gd-richtext-editable a { color: var(--gd-a-primary); text-decoration: underline; cursor: pointer; }
+.gd-richtext-editable a[rel~="nofollow"] { text-decoration-style: dashed; }
+.gd-richtext-editable h4 { font-size: 1rem; font-weight: 700; margin: .5rem 0; }
+.gd-richtext-editable img { max-width: 100%; height: auto; }
+.gd-link-dialog {
+  width: min(460px, calc(100vw - 2rem)); border: 1px solid var(--gd-a-border);
+  border-radius: .75rem; padding: 1.1rem 1.2rem; box-shadow: 0 20px 50px -20px rgba(0,0,0,.35);
+}
+.gd-link-dialog::backdrop { background: rgba(23,27,43,.45); }
+.gd-link-dialog-opts .form-check { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .35rem; }
+.gd-link-dialog-opts .form-check-input { flex: none; margin-top: .25rem; }
+.gd-richtext-btn { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
